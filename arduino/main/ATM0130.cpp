@@ -1,7 +1,6 @@
 //AE-ATM0310B3 with Arduino UNO R3
 //2020/01/12
 
-#import <Arduino.h>
 #include "ATM0130.h"
 
 ATM0130::ATM0130(uint8_t pin_dat_cmd, uint8_t pin_reset) {

@@ -1,13 +1,14 @@
 from PIL import Image
 import numpy as np
+import sys
 
-image = Image.open('./img/094.png')
-image.convert("RGB")
-im = np.array(Image.open('./img/094.png'))
-
+source_img = sys.argv[1] # './img/094.png' 
+print('source image: ' + source_img)
 print(im.shape)
 
-print(im[1])
+image = Image.open(source_img)
+im = np.array(Image.open(source_img))
+
 data = []
 for row in im:
   print(row)
