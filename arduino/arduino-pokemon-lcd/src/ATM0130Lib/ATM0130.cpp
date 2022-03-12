@@ -9,7 +9,6 @@ ATM0130::ATM0130(uint8_t pin_dat_cmd, uint8_t pin_reset) {
   reset = pin_reset;
   pinMode(dat_cmd, OUTPUT);
   pinMode(reset, OUTPUT);
-
   pinMode(SS, OUTPUT);
   pinMode(SCK, OUTPUT);
   pinMode(MOSI, OUTPUT);

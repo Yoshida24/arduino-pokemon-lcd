@@ -1,12 +1,7 @@
-#include "ATM0130.h"
-#include <avr/pgmspace.h>
-
-
-// ゲンガー 
 // カラーパレット
-const uint8_t colorCodeLen = 21;
-const uint8_t colorParamLen = 4;
-const uint8_t myDictionaryArr[colorCodeLen][colorParamLen] = {
+const int colorPaletteLen = 21;
+const int colorsLen = 4;
+const PROGMEM uint8_t colorPalette[colorPaletteLen][colorsLen] = {
     {0, 0, 0, 0},
     {1, 49, 49, 49},
     {2, 53, 51, 51},
@@ -30,9 +25,9 @@ const uint8_t myDictionaryArr[colorCodeLen][colorParamLen] = {
     {20, 255, 255, 255},
 };
 // キャラクタ画像
-const uint8_t xLen = 32;
-const uint8_t yLen = 32;
-const PROGMEM uint8_t data[yLen][xLen] = {
+const int xLen = 32;
+const int yLen = 32;
+const PROGMEM uint8_t imageFormedInColorPalette[yLen][xLen] = {
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -66,43 +61,3 @@ const PROGMEM uint8_t data[yLen][xLen] = {
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
-
-
-// ピクセルサイズとオフセット
-const uint8_t pixelSize = 7;
-const uint8_t offsetX = 0; // 左上原点
-const uint8_t offsetY = 0; // 左上原点
-
-//ピンの割り当て (D/C , /RES)
-const uint8_t DC = 9;
-const uint8_t RES = 8;
-
-ATM0130 myATM0130 = ATM0130(DC, RES);
-
-void setup()
-{
-  myATM0130.begin();
-  myATM0130.setFigColor(0, 0, 0);
-  myATM0130.drawRectangle(0, 0, 240, 240);
-}
-
-void loop()
-{
-  drawPicture();
-}
-
-void drawPicture()
-{
-  for (uint8_t y = 0; y < yLen; y++)
-  {
-    for (uint8_t x = 0; x < xLen; x++)
-    {
-      uint8_t pixel = pgm_read_byte(&(data[y][x]));
-      uint8_t r = myDictionaryArr[pixel][1];
-      uint8_t g = myDictionaryArr[pixel][0];
-      uint8_t b = myDictionaryArr[pixel][2];
-      myATM0130.setFigColor(r, g, b);
-      myATM0130.drawRectangle(x * pixelSize + offsetX, y * pixelSize + offsetY, pixelSize, pixelSize);
-    }
-  }
-}
