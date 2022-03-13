@@ -1,6 +1,6 @@
 #include "src/ATM0130Lib/ATM0130.h"
 #include <avr/pgmspace.h>
-#include "src/PixelWithColorPaletteLib/magneton80x80.h"
+#include "src/PixelWithColorPaletteLib/gyarados80x80.h"
 
 // ピクセルサイズとオフセット
 const uint8_t pixelSize = 3;
